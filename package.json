@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "main": "main.js",
+  "name": "Areen Killer",
+  "scripts": {
+    "watch": "node main.js"
+  },
+  "dependencies": {
+    "@atproto/api": "^0.20.34",
+    "@skyware/firehose": "^0.5.2",
+    "dotenv": "^17.4.2"
+  }
+}
