@@ -4,7 +4,7 @@
 
 There is a series of accounts named Areen on Bluesky. They schlock a fraudulent gofundme link to everyone by retweeting every single message on bluesky.
 
-You post anything? Areen will retweet it. He will spam your notifications. 
+You post anything? Areen will retweet it. He will spam your notifications.
 
 It's annoying as hell.
 
