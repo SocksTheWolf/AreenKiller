@@ -29,5 +29,5 @@ These are stored in a `.env` file.
 - `MOD_LIST` - The user list did that you want to add all accounts to.
 - `FIREHOSE_URL` - The websocket to listen to.
 
-——-
+---
 I swear to god, I fucking hate how garbage this is, but it works fast. I made it in about an hour because I was annoyed regarding how shit this was being handled.
