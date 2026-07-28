@@ -44,6 +44,21 @@ async function addUserToList(agent, userDid) {
   return false;
 }
 
+// unused, but could be used if these handles were not did:web
+async function resolveHandle(user) {
+  return await fetch(`https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=${user}`).then((resp) => {
+    if (resp.ok) {
+      return resp.json().then((jsonData) => {
+        if (has(jsonData, "did")) {
+          return jsonData.did;
+        }
+        return null;
+      });
+    }
+    return null;
+  });
+}
+
 // our bsky agent to manage adding to the list.
 let ourAgentToRainDown = null;
 const createBskyAgentNow = async () => {
@@ -89,9 +104,11 @@ firehose.on("commit", async (message) => {
     if (!op.path.includes("app.bsky.actor.profile") || op.action != "create")
       continue;
 
-    console.log(`GOT NEW RECORD ${op.record.displayName}`);
+    const recordName = op.record.displayName;
+    console.log(`GOT NEW RECORD ${recordName}`);
     // we could probably do more to make sure this is a domain. like regex, but w/e
-    didList.push(`did:web:${op.record.displayName}`);
+    // the displayname should also be piped to resolveHandle
+    didList.push(`did:web:${recordName}`);
   }
   await processDidList();
 });
