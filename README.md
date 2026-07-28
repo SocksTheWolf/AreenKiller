@@ -1,5 +1,13 @@
 # Areen Killer
 
+## Who?
+
+There is a series of accounts named Areen on Bluesky. They schlock a fraudulent gofundme link to everyone by retweeting every single message on bluesky.
+
+You post anything? Areen will retweet it. He will spam your notifications. 
+
+It's annoying as hell.
+
 ## What the fuck
 
 This kills Areen. No one liked his fake ass retweeting bullshit anyways. Fuck that guy.
@@ -17,4 +25,4 @@ These are stored in a `.env` file.
 - `MOD_LIST` - The user list did that you want to add all accounts to.
 - `FIREHOSE_URL` - The websocket to listen to.
 
-I swear to god, I fucking hate this.
+I swear to god, I fucking hate how garbage this is, but it works fast.
