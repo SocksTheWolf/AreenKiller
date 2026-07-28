@@ -99,7 +99,11 @@ firehose.on("open", () => {
   console.log("connection established");
 });
 firehose.on("close", (cur) => {
-  console.log("connection was closed, starting again");
+  console.error("connection was closed, starting again");
+  firehose.start();
+});
+firehose.on("websocketError", () => {
+  console.error("websocket had error, restarting...");
   firehose.start();
 });
 firehose.start();
