@@ -26,7 +26,7 @@ async function getBskyAgent() {
 // fuck you areen, die.
 async function addUserToList(agent, userDid) {
   try {
-    await agent.com.atproto.repo.createRecord({
+    const addToList = await agent.com.atproto.repo.createRecord({
       repo: agent.did,
       collection: 'app.bsky.graph.listitem',
       record: {
@@ -36,9 +36,29 @@ async function addUserToList(agent, userDid) {
         createdAt: new Date().toISOString()
       }
     });
-    console.log(`added ${userDid} to list`);
-    return true;
+    return addToList.success;
   } catch(ex) {
+    console.error(ex);
+  }
+  return false;
+};
+
+// try to reduce damage
+async function autoReportAreen(agent, userDid) {
+  try {
+    const reportPayload = {
+      reasonType: "com.atproto.moderation.defs#reasonSpam",
+      reason: "fake gofundme, mass retweets, areen spam",
+      subject: {
+        "$type": 'com.atproto.admin.defs#repoRef',
+        did: userDid
+      }
+    };
+    // for extra damage, automate the reports against the account
+    const reportGen = await agent.createModerationReport(reportPayload);
+    console.log(`reported ${userDid}`);
+    return reportGen.success;
+  } catch (ex) {
     console.error(ex);
   }
   return false;
@@ -91,6 +111,8 @@ const processDidList = async () => {
       console.log("failed to add user, retrying again");
       didList.push(accountToRemove);
       ourAgentToRainDown = null;
+    } else {
+      await autoReportAreen(ourAgentToRainDown, accountToRemove);
     }
   }
 };
